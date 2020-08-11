@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:MaddyDocker/local.dart';
+import 'package:MaddyDocker/wp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
@@ -19,18 +21,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-_launchURL3() async {
-  const url =
-      'https://play.google.com/store/apps/details?id=com.spotify.music&hl=en_IN';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
 _launchURL2() async {
-  const url = 'https://github.com/aaditya2801/audio-video-player.git';
+  const url = 'http://192.168.29.56:8080';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
@@ -93,7 +85,19 @@ class MyDrawerApp extends StatelessWidget {
               title: Row(
                 children: <Widget>[
                   IconButton(icon: Icon(Icons.laptop_windows), onPressed: null),
-                  Text('CONTAINER')
+                  Text('LOCAL CMD')
+                ],
+              ),
+              onTap: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) => new Local()));
+              },
+            ),
+            new ListTile(
+              title: Row(
+                children: <Widget>[
+                  IconButton(icon: Icon(Icons.laptop_windows), onPressed: null),
+                  Text('DB LAUNCHER')
                 ],
               ),
               onTap: () {
@@ -101,6 +105,27 @@ class MyDrawerApp extends StatelessWidget {
                     new MaterialPageRoute(builder: (context) => new MySql()));
               },
             ),
+            new ListTile(
+              title: Row(
+                children: <Widget>[
+                  IconButton(icon: Icon(Icons.laptop_windows), onPressed: null),
+                  Text('SERVER LAUNCHER')
+                ],
+              ),
+              onTap: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (context) => new MyWp()));
+              },
+            ),
+            new ListTile(
+                title: Row(
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(Icons.chrome_reader_mode), onPressed: null),
+                    Text('WORDPRESS SITE')
+                  ],
+                ),
+                onTap: _launchURL2),
           ],
         ),
       ),
