@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 myt2() {
   Fluttertoast.showToast(
@@ -38,31 +40,56 @@ class _LocalState extends State<Local> {
         leading: Icon(Icons.laptop_chromebook),
         title: Text('LOCAL CMD'),
       ),
-      body: Center(
+      body: Container(
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            color: Colors.blueGrey,
+            color: Colors.black,
             child: Column(
               children: [
-                Card(
-                  child: TextField(
-                    onChanged: (val) {
-                      command = val;
-                    },
-                    autocorrect: false,
-                    cursorColor: Colors.blue,
-                    style: TextStyle(height: 1),
-                    decoration: InputDecoration(
-                      hintText: 'Enter Linux Command ',
-                      border: const OutlineInputBorder(),
+                Container(
+                  child: Card(
+                    color: Colors.black,
+                    elevation: 20,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(50),
+                            bottomLeft: Radius.circular(00),
+                            bottomRight: Radius.circular(00),
+                            topRight: Radius.circular(50)),
+                        side: BorderSide(width: 6, color: Colors.red)),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      onChanged: (val) {
+                        command = val;
+                      },
+                      autocorrect: false,
+                      cursorColor: Colors.blue,
+                      style: TextStyle(height: 1, color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'Enter Linux Command ',
+                        border: const OutlineInputBorder(),
+                      ),
                     ),
                   ),
                 ),
                 Card(
+                  elevation: 20,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(100),
+                          bottomLeft: Radius.circular(100),
+                          bottomRight: Radius.circular(100),
+                          topRight: Radius.circular(100)),
+                      side: BorderSide(width: 6, color: Colors.red)),
                   child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.red)),
                       color: Colors.black,
                       onPressed: () {
+                        final play = AudioCache();
+                        play.play('console.mp3');
                         web(command);
                       },
                       child: Icon(
@@ -70,15 +97,30 @@ class _LocalState extends State<Local> {
                         color: Colors.white,
                       )),
                 ),
-                Card(
-                  child: Text(webdata ?? "output is coming..."),
+                Container(
+                  width: double.infinity,
+                  child: Card(
+                    color: Colors.black,
+                    elevation: 20,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(00),
+                            bottomLeft: Radius.circular(30),
+                            bottomRight: Radius.circular(30),
+                            topRight: Radius.circular(00)),
+                        side: BorderSide(width: 6, color: Colors.red)),
+                    child: Text(
+                      webdata ?? "                       WELCOME TO CONSOLE...",
+                      style: TextStyle(height: 3, color: Colors.white),
+                    ),
+                  ),
                 )
               ],
             ),
           ),
         ),
       ),
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.black,
     );
   }
 }
