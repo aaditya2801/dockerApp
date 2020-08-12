@@ -7,6 +7,8 @@ import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'mysql.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(MyApp());
@@ -125,7 +127,11 @@ class MyDrawerApp extends StatelessWidget {
                     Text('WORDPRESS SITE')
                   ],
                 ),
-                onTap: _launchURL2),
+                onTap: () {
+                  _launchURL2();
+                  final play = AudioCache();
+                  play.play('wordpresssite.mp3');
+                }),
           ],
         ),
       ),
