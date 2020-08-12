@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 web(rootpass, mysqluser, mysqlpass, mysqldb, volume, osname, imagename) async {
   var url =
@@ -14,9 +16,9 @@ myt2() {
   Fluttertoast.showToast(
       msg: "Container Launched",
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
+      gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 6,
-      backgroundColor: Colors.amber,
+      backgroundColor: Colors.black,
       textColor: Colors.white,
       fontSize: 16.0);
 }
@@ -38,73 +40,131 @@ class MySql extends StatelessWidget {
         title: Text('MYSQL CONTAINER'),
       ),
       body: Center(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          color: Colors.grey,
-          child: Column(
-            children: [
-              Card(
-                child: TextField(
-                  onChanged: (val) {
-                    rootpass = val;
-                  },
-                ),
-              ),
-              Card(
-                child: TextField(
-                  onChanged: (val) {
-                    mysqluser = val;
-                  },
-                ),
-              ),
-              Card(
-                child: TextField(
-                  onChanged: (val) {
-                    mysqlpass = val;
-                  },
-                ),
-              ),
-              Card(
-                child: TextField(
-                  onChanged: (val) {
-                    mysqldb = val;
-                  },
-                ),
-              ),
-              Card(
-                child: TextField(
-                  onChanged: (val) {
-                    volume = val;
-                  },
-                ),
-              ),
-              Card(
-                child: TextField(
-                  onChanged: (val) {
-                    osname = val;
-                  },
-                ),
-              ),
-              Card(
-                child: TextField(
-                  onChanged: (val) {
-                    imagename = val;
-                  },
-                ),
-              ),
-              Card(
-                child: FlatButton(
-                    onPressed: () {
-                      myt2();
-                      web(rootpass, mysqluser, mysqlpass, mysqldb, volume,
-                          osname, imagename);
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            color: Colors.blueGrey,
+            child: Column(
+              children: [
+                Card(
+                  child: TextField(
+                    onChanged: (val) {
+                      rootpass = val;
                     },
-                    child: Text('press here')),
-              )
-            ],
+                    autocorrect: false,
+                    cursorColor: Colors.blue,
+                    style: TextStyle(height: 1),
+                    decoration: InputDecoration(
+                      hintText: 'Enter Root Password ',
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: TextField(
+                    onChanged: (val) {
+                      mysqluser = val;
+                    },
+                    autocorrect: false,
+                    cursorColor: Colors.blue,
+                    style: TextStyle(height: 1),
+                    decoration: InputDecoration(
+                      hintText: 'Enter MYSQL User ',
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: TextField(
+                    onChanged: (val) {
+                      mysqlpass = val;
+                    },
+                    autocorrect: false,
+                    cursorColor: Colors.blue,
+                    style: TextStyle(height: 1),
+                    decoration: InputDecoration(
+                      hintText: 'Enter MYSQL Password ',
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: TextField(
+                    onChanged: (val) {
+                      mysqldb = val;
+                    },
+                    autocorrect: false,
+                    cursorColor: Colors.blue,
+                    style: TextStyle(height: 1),
+                    decoration: InputDecoration(
+                      hintText: 'Enter Database name ',
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: TextField(
+                    onChanged: (val) {
+                      volume = val;
+                    },
+                    autocorrect: false,
+                    cursorColor: Colors.blue,
+                    style: TextStyle(height: 1),
+                    decoration: InputDecoration(
+                      hintText: 'Enter Volume Name ',
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: TextField(
+                    onChanged: (val) {
+                      osname = val;
+                    },
+                    autocorrect: false,
+                    cursorColor: Colors.blue,
+                    style: TextStyle(height: 1),
+                    decoration: InputDecoration(
+                      hintText: 'Enter OS Name ',
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: TextField(
+                    onChanged: (val) {
+                      imagename = val;
+                    },
+                    autocorrect: false,
+                    cursorColor: Colors.blue,
+                    style: TextStyle(height: 1),
+                    decoration: InputDecoration(
+                      hintText: 'Enter Image Name ',
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: FlatButton(
+                      color: Colors.black,
+                      onPressed: () {
+                        final play = AudioCache();
+                        play.play('database.mp3');
+                        myt2();
+                        web(rootpass, mysqluser, mysqlpass, mysqldb, volume,
+                            osname, imagename);
+                      },
+                      child: Icon(
+                        Icons.settings_power,
+                        color: Colors.white,
+                      )),
+                )
+              ],
+            ),
           ),
         ),
       ),
+      backgroundColor: Colors.blueGrey,
     );
   }
 }
