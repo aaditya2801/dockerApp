@@ -5,9 +5,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-web(rootpass, mysqluser, mysqlpass, mysqldb, volume, osname, imagename) async {
+web(rootpass, mysqluser, mysqlpass, mysqldb, volume, osname) async {
   var url =
-      "http://192.168.29.56/cgi-bin/web.py?z=${rootpass}&a=${mysqluser}&b=${mysqlpass}&c=${mysqldb}&d=${volume}&x=${osname}&y=${imagename}";
+      "http://192.168.29.56/cgi-bin/web.py?z=${rootpass}&a=${mysqluser}&b=${mysqlpass}&c=${mysqldb}&d=${volume}&x=${osname}";
   var r = await http.get(url);
   print(r.body);
 }
@@ -29,7 +29,6 @@ String mysqlpass;
 String mysqldb;
 String volume;
 String osname;
-String imagename;
 
 class MySql extends StatelessWidget {
   @override
@@ -56,7 +55,9 @@ class MySql extends StatelessWidget {
                     style: TextStyle(height: 1),
                     decoration: InputDecoration(
                       hintText: 'Enter Root Password ',
-                      border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
                     ),
                   ),
                 ),
@@ -70,7 +71,8 @@ class MySql extends StatelessWidget {
                     style: TextStyle(height: 1),
                     decoration: InputDecoration(
                       hintText: 'Enter MYSQL User ',
-                      border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue)),
                     ),
                   ),
                 ),
@@ -84,7 +86,8 @@ class MySql extends StatelessWidget {
                     style: TextStyle(height: 1),
                     decoration: InputDecoration(
                       hintText: 'Enter MYSQL Password ',
-                      border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue)),
                     ),
                   ),
                 ),
@@ -98,7 +101,8 @@ class MySql extends StatelessWidget {
                     style: TextStyle(height: 1),
                     decoration: InputDecoration(
                       hintText: 'Enter Database name ',
-                      border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue)),
                     ),
                   ),
                 ),
@@ -112,7 +116,8 @@ class MySql extends StatelessWidget {
                     style: TextStyle(height: 1),
                     decoration: InputDecoration(
                       hintText: 'Enter Volume Name ',
-                      border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue)),
                     ),
                   ),
                 ),
@@ -126,21 +131,8 @@ class MySql extends StatelessWidget {
                     style: TextStyle(height: 1),
                     decoration: InputDecoration(
                       hintText: 'Enter OS Name ',
-                      border: const OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                Card(
-                  child: TextField(
-                    onChanged: (val) {
-                      imagename = val;
-                    },
-                    autocorrect: false,
-                    cursorColor: Colors.blue,
-                    style: TextStyle(height: 1),
-                    decoration: InputDecoration(
-                      hintText: 'Enter Image Name ',
-                      border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue)),
                     ),
                   ),
                 ),
@@ -152,7 +144,7 @@ class MySql extends StatelessWidget {
                         play.play('database.mp3');
                         myt2();
                         web(rootpass, mysqluser, mysqlpass, mysqldb, volume,
-                            osname, imagename);
+                            osname);
                       },
                       child: Icon(
                         Icons.settings_power,
