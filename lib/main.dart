@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'mysql.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 void main() {
   runApp(MyApp());
@@ -136,7 +137,9 @@ class MyDrawerApp extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: Text('DOCKER'),
+        title: Text(
+          'AS SERVER',
+        ),
         backgroundColor: Colors.blue,
         actions: <Widget>[
           IconButton(icon: Icon(Icons.account_circle), onPressed: _launchURL)
@@ -152,6 +155,50 @@ class MyDrawerApp extends StatelessWidget {
           alignment: Alignment.topCenter,
           children: <Widget>[
             Container(
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 200.0,
+                    child: TextLiquidFill(
+                      text: 'DOCKER',
+                      waveColor: Colors.blueAccent,
+                      boxBackgroundColor: Colors.amber,
+                      textStyle: TextStyle(
+                        fontSize: 29.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      boxHeight: 100.0,
+                    ),
+                  ),
+                  Card(
+                    color: Colors.amber,
+                    child: Image.asset('assets/mydocker.gif'),
+                  ),
+                  SizedBox(
+                    width: 250.0,
+                    child: ColorizeAnimatedTextKit(
+                        onTap: () {
+                          print("Tap Event");
+                        },
+                        text: [
+                          "By",
+                          "Aaditya",
+                          "Siddhant",
+                          " ",
+                        ],
+                        textStyle:
+                            TextStyle(fontSize: 30.0, fontFamily: 'RobotoMono'),
+                        colors: [
+                          Colors.purple,
+                          Colors.blue,
+                          Colors.black,
+                          Colors.red,
+                        ],
+                        textAlign: TextAlign.center,
+                        alignment: Alignment.center),
+                  )
+                ],
+              ),
               decoration: BoxDecoration(
                 color: Colors.amber,
                 borderRadius: BorderRadius.circular(10),
